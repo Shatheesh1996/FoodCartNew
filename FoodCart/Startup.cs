@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ShoppingCartRepository.Interface;
+using ShoppingCartRepository.Processor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,17 @@ namespace FoodCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+            // services.Add(new ServiceDescriptor(typeof(ShoppingCartProcessor), typeof(IShoppingCart), ServiceLifetime.Scoped));
+            services.AddSingleton<IShoppingCart, ShoppingCartProcessor>();
             services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +46,8 @@ namespace FoodCart
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
