@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using NLog;
 using ShoppingCartRepository.Interface;
 using ShoppingCartRepository.Models;
 using System;
@@ -18,11 +20,14 @@ namespace FoodCart.Controllers
     {
         public readonly IConfiguration _configuration;
         public readonly IShoppingCart _shoppingCart;
+        private readonly ILogger<ShoppingCartController> _logger;
         public ShoppingCartController(IConfiguration configuration,
-            IShoppingCart shoppingCart)
+            IShoppingCart shoppingCart, ILogger<ShoppingCartController> logger)
         {
             _configuration = configuration;
             _shoppingCart = shoppingCart;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
         }
         [HttpPost]
         [Route("AddCart")]
@@ -46,6 +51,7 @@ namespace FoodCart.Controllers
         [Route("GetShoppingCartItem/{id}")]
         public Food GetShoppingCartItem(int id)
         {
+            _logger.LogDebug(1, "Executing GetShoppingCartItem");
             var food = _shoppingCart.GetShoppingCartItem(id);
             return food;
         }
