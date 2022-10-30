@@ -1,3 +1,4 @@
+using FoodCart.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ShoppingCartRepository.Common;
 using ShoppingCartRepository.Interface;
 using ShoppingCartRepository.Processor;
 using System;
@@ -26,6 +28,8 @@ namespace FoodCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = ServiceConfigurationMapper.GetServiceConfiguration(Configuration);
+            services.AddSingleton<IServiceConfiguration>(config);
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -35,6 +39,7 @@ namespace FoodCart
             });
             // services.Add(new ServiceDescriptor(typeof(ShoppingCartProcessor), typeof(IShoppingCart), ServiceLifetime.Scoped));
             services.AddSingleton<IShoppingCart, ShoppingCartProcessor>();
+            services.AddSingleton<IConnection, Connection>();
             services.AddControllers();
 
         }

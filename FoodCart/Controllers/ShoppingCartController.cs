@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ShoppingCartRepository.Interface;
+using ShoppingCartRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
