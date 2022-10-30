@@ -2,7 +2,7 @@
 
 namespace FoodCart.Common
 {
-    public class ServiceConfiguration: IServiceConfiguration
+     public class ServiceConfiguration: IServiceConfiguration
     {
         private readonly Dictionary<string, string> _configValue = new Dictionary<string, string>();
 
