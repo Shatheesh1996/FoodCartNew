@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace FoodCart.Common
 {
-    public class ServiceConfigurationMapper
+    public interface IServiceConfiguration
     {
+         string this[string key] { get; set; }
     }
 }
