@@ -30,17 +30,16 @@ namespace FoodCart
         {
             var config = ServiceConfigurationMapper.GetServiceConfiguration(Configuration);
             services.AddSingleton<IServiceConfiguration>(config);
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
-            // services.Add(new ServiceDescriptor(typeof(ShoppingCartProcessor), typeof(IShoppingCart), ServiceLifetime.Scoped));
-            services.AddSingleton<IShoppingCart, ShoppingCartProcessor>();
-            services.AddSingleton<IConnection, Connection>();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader());
+            //});
+            services.AddProcessor();
             services.AddControllers();
+            services.AddSwaggerGen();
 
         }
 
@@ -61,6 +60,10 @@ namespace FoodCart
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V2");
             });
         }
     }
