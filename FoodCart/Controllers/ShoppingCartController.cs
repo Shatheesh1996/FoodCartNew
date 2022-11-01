@@ -1,4 +1,4 @@
-﻿using FoodCart.Models;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,22 +31,11 @@ namespace FoodCart.Controllers
         }
         [HttpPost]
         [Route("AddCart")]
-        public string AddCart(Request_body_property RequestObj)
+        public string AddCart()
         {
-            SqlConnection Post_connection = new SqlConnection(_configuration.GetConnectionString("AppConnection").ToString());
-            SqlCommand Post_cmd = new SqlCommand("insert into shoppingcart_item(Userid,food_id,Quantity)values( '" + RequestObj.User_id + "', '" + RequestObj.Food_id + "', '" + RequestObj.Quantity + "')", Post_connection);
-            Post_connection.Open();
-            int i = Post_cmd.ExecuteNonQuery();
-            Post_connection.Close();
-            if (i > 0)
-            {
-                return "request success";
-            }
-            else
-            {
-                return "request failed";
-            }
+            return AddCart();
         }
+
         [HttpGet]
         [Route("GetShoppingCartItem/{id}")]
         public Food GetShoppingCartItem(int id)
@@ -54,6 +43,13 @@ namespace FoodCart.Controllers
             _logger.LogDebug(1, "Executing GetShoppingCartItem");
             var food = _shoppingCart.GetShoppingCartItem(id);
             return food;
+        }
+
+        [HttpDelete]
+        [Route("DeleteCart/{cart_id}")]
+        public string DeleteCart(int cart_id)
+        {
+            return DeleteCart(cart_id);
         }
     }
 }

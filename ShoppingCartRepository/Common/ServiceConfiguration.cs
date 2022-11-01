@@ -8,7 +8,7 @@ namespace FoodCart.Common
 
         public string this[string key]
         {
-            get
+            get 
             {
                 if(_configValue.ContainsKey(key))
                 {

@@ -5,8 +5,12 @@ using System.Text;
 
 namespace ShoppingCartRepository.Interface
 {
-    public interface IShoppingCart
+  
+      public interface IShoppingCart
     {
         Food GetShoppingCartItem(int id);
+        string AddCart(Shoptocart Post_Obj);
+        ShoptoCart_Response DeleteCart(int cart_id);
     }
+
 }
