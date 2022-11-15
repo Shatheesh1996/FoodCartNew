@@ -27,29 +27,31 @@ namespace FoodCart.Controllers
             _configuration = configuration;
             _shoppingCart = shoppingCart;
             _logger = logger;
-            _logger.LogDebug(1, "NLog injected into HomeController");
+            _logger.LogDebug(1, "NLog injected into ShoppingCartController");
         }
         [HttpPost]
-        [Route("AddCart")]
-        public string AddCart()
+        [Route("AddShoppingCartitem")]
+        public string AddShoppingCartitem(Shoptocart Post_Obj)
         {
-            return AddCart();
+            _logger.LogDebug(2, "Executing AddShoppingCartitem ");
+            return _shoppingCart.AddShoppingCartitem(Post_Obj);
         }
 
         [HttpGet]
         [Route("GetShoppingCartItem/{id}")]
-        public Food GetShoppingCartItem(int id)
+        public List<ShoppingCartItem> GetShoppingCartItem(int id)
         {
             _logger.LogDebug(1, "Executing GetShoppingCartItem");
-            var food = _shoppingCart.GetShoppingCartItem(id);
-            return food;
+            List<ShoppingCartItem> cart_item = _shoppingCart.GetShoppingCartItem(id);
+            return cart_item;
         }
 
         [HttpDelete]
-        [Route("DeleteCart/{cart_id}")]
-        public string DeleteCart(int cart_id)
+        [Route("DeleteCartitem /{cart_id}")]
+        public ShoptoCart_Response DeleteCartitem(int cart_id)
         {
-            return DeleteCart(cart_id);
+            _logger.LogDebug(3, "Executing DeleteCartitem ");
+            return _shoppingCart.DeleteCartitem(cart_id);
         }
     }
 }

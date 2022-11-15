@@ -8,9 +8,9 @@ namespace ShoppingCartRepository.Interface
   
       public interface IShoppingCart
     {
-        Food GetShoppingCartItem(int id);
-        string AddCart(Shoptocart Post_Obj);
-        ShoptoCart_Response DeleteCart(int cart_id);
+        List<ShoppingCartItem> GetShoppingCartItem(int id);
+        string AddShoppingCartitem(Shoptocart Post_Obj);
+        ShoptoCart_Response DeleteCartitem(int cart_id);
     }
 
 }

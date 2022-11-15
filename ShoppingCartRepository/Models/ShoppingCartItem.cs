@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingCartRepository.Models
 {
-    public class Food
+    public class ShoppingCartItem
     {
         public string Name { get; set; }
         public string Description { get; set; }

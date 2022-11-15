@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using ShoppingCartRepository.Interface;
+using ShoppingCartRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +16,23 @@ namespace FoodCart.Controllers
     public class OrderController : ControllerBase
     {
         public readonly IConfiguration _configuration;
+        public readonly ILogger<OrderController> _logger;
 
         public readonly IOrder _order;
-        public OrderController(IConfiguration configuration, IOrder order)
+        public OrderController(IConfiguration configuration, IOrder order, ILogger<OrderController> logger)
         {
             _configuration = configuration;
             _order = order;
+            _logger = logger;
         }
 
         [HttpPost]
         [Route("AddOrder")]
-        public string AddOrder()
+        public Order_Response AddOrder(Order order_properties)
         {
-            return AddOrder();
+            _logger.LogDebug(1, "Executing AddOrder");
+
+            return _order.AddOrder(order_properties);
         }
 
     }
