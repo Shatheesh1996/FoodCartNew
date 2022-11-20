@@ -29,6 +29,8 @@ namespace ShoppingCartRepository.Processor
                
                 connection.Open();
                 int i = cmd.ExecuteNonQuery();
+                SqlCommand command = new SqlCommand("select top 1 ID  from orders order by id desc", connection);
+                Response.OrderId = (int)command.ExecuteScalar();
                 connection.Close();
                 if (i > 0)
                 {

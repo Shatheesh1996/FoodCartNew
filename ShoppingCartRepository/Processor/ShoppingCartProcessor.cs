@@ -66,7 +66,7 @@ namespace ShoppingCartRepository.Processor
 
 
                 SqlConnection Post_connection = new SqlConnection(_connection.GetConnection());
-                SqlCommand Post_cmd = new SqlCommand("insert into shoppingcart_item(Userid,food_id,Quantity)values( '" + Post_Obj.User_id + "', '" + Post_Obj.Food_id + "', '" + Post_Obj.Quantity + "')", Post_connection);
+                SqlCommand Post_cmd = new SqlCommand("insert into shoppingcart_item(Userid,food_id,Quantity, Price)values( '" + Post_Obj.User_id + "', '" + Post_Obj.Food_id + "', '" + Post_Obj.Quantity + "', '"+Post_Obj.Price +"')", Post_connection);
                 Post_connection.Open();
                 int i = Post_cmd.ExecuteNonQuery();
                 Post_connection.Close();

@@ -14,7 +14,8 @@ namespace ShoppingCartRepository.Common
             services.AddScoped<IShoppingCart, ShoppingCartProcessor>();
             services.AddScoped<IConnection, Connection>();
             services.AddScoped<IOrderDetails, OrderDetailsProcessor>();
-             services.AddScoped<IOrder, OrderProcessor>();
+            services.AddScoped<IOrder, OrderProcessor>();
+            services.AddScoped<IFood, FoodProcessor>();
         }
     }
 }

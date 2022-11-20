@@ -16,12 +16,10 @@ namespace FoodCart.Controllers
     [ApiController]
     public class OrderDetailController : ControllerBase
     {
-        public readonly IConfiguration _configuration;
         public readonly IOrderDetails _OrderDetails;
         public readonly ILogger<OrderDetailController> _logger;
-        public OrderDetailController(IConfiguration configuration, IOrderDetails OrderDetails, ILogger<OrderDetailController> logger)
+        public OrderDetailController(IOrderDetails OrderDetails, ILogger<OrderDetailController> logger)
         {
-            _configuration = configuration;
             _OrderDetails = OrderDetails;
             _logger = logger;
         }

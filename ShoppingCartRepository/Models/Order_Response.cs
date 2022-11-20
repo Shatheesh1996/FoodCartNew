@@ -7,5 +7,6 @@ namespace ShoppingCartRepository.Models
     public class Order_Response
     {
         public string status_message { get; set; }
+        public int OrderId { get; set; }
     }
 }

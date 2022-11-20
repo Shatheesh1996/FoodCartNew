@@ -9,5 +9,6 @@ namespace ShoppingCartRepository.Models
         public int Food_id { get; set; }
         public int Quantity { get; set; }
         public int User_id { get; set; }
+        public decimal Price { get; set; }
     }
 }
